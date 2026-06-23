@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>All Employees</title>
+</head>
+<body>
+
+<h2>Employee List</h2>
+
+<button onclick="loadEmployees()">Show Employees</button>
+
+<div id="result"></div>
+
+<script>
+
+function loadEmployees() {
+
+    fetch("http://localhost/hr_crm/api/employees/get_all.php")
+    .then(response => response.json())
+    .then(data => {
+
+        let output = "";
+
+        data.forEach(employee => {
+
+            output += `
+                <p>
+                    ID: ${employee.EmployeeID}<br>
+                    Name: ${employee.FullName}<br>
+                    Email: ${employee.Email}<br>
+                    Phone: ${employee.Phone}
+                </p>
+                <hr>
+            `;
+        });
+
+        document.getElementById("result").innerHTML = output;
+
+    });
+
+}
+
+</script>
+
+</body>
+</html>
